@@ -1,0 +1,25 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.reminder.repository.RoleRepository">
+    <resultMap id="RoleResultMap" type="com.reminder.model.Role">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <select id="selectById" parameterType="int" resultMap="RoleResultMap">
+        SELECT * FROM role WHERE id = #{id}
+    </select>
+
+    <select id="selectByRoleName" parameterType="String" resultMap="RoleResultMap">
+        SELECT * FROM role WHERE name = #{name}
+    </select>
+
+    <insert id="insertRole" parameterType="com.reminder.model.Role" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO role (name)
+        VALUES (#{name})
+    </insert>
+    
+    <select id="selectAllRoles" resultMap="RoleResultMap">
+        SELECT * FROM role
+    </select>
+</mapper>

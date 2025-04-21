@@ -1,0 +1,27 @@
+name: Java CI for Reminder Project
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Clone source code
+        uses: actions/checkout@v3
+
+      - name: ☕ Setup Java 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: 🧰 Build project with Maven
+        run: ./mvnw clean install -DskipTests=false
+
+      - name: ✅ Run unit tests
+        run: ./mvnw test
